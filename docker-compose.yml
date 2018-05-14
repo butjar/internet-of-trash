@@ -1,0 +1,36 @@
+version: '3'
+services:
+  eclipse-mosquitto:
+    build: 'eclipse-mosquitto'
+    ports:
+      - '1883:1883'
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+  dashboard:
+    depends_on:
+      - 'redis'
+    build: 'dashboard'
+    ports:
+      - '5000:5000'
+  subscriber:
+    depends_on:
+      - 'eclipse-mosquitto'
+      - 'redis'
+    build: 'app'
+    environment: 
+      - PYTHONUNBUFFERED=0
+    command: '/app/app/subscriber/subscriber.py app/settings.docker.ini'
+  worker:
+    depends_on:
+      - 'redis'
+    build: 'app'
+    command: 'rq worker -c app.worker.settings'
+  db:
+    build: 'postgres'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
