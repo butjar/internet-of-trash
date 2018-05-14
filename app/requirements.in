@@ -1,0 +1,6 @@
+rq
+redis
+paho-mqtt
+requests
+configparser
+psycopg2
