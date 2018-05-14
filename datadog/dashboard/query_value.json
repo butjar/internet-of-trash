@@ -1,0 +1,34 @@
+{
+  "viz": "query_value",
+  "requests": [
+    {
+      "q": "avg:postgresql.trashlevel{*}",
+      "type": null,
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [
+        {
+          "palette": "white_on_red",
+          "comparator": ">",
+          "value": "80"
+        },
+        {
+          "palette": "white_on_yellow",
+          "comparator": ">=",
+          "value": "50"
+        },
+        {
+          "palette": "white_on_green",
+          "comparator": "<",
+          "value": "50"
+        }
+      ],
+      "aggregator": "last"
+    }
+  ],
+  "autoscale": true,
+  "precision": "0"
+}

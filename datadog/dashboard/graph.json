@@ -1,0 +1,17 @@
+{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "avg:postgresql.trashlevel{*}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "autoscale": true
+}
